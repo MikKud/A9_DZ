@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
 
@@ -118,9 +119,17 @@ public:
 	}
 	void  delHouse(int Num)
 	{
+		int count = 0;
 		for (int i = 0; i<listH.size(); i++)
 			if (listH[i].getHouseNumber() == Num)
+			{
 				listH.erase(listH.begin() + i);
+				count++;
+			}
+		if (!count)
+		{
+			throw invalid_argument("There is no House with such number");
+		}
 	}
 	bool checkGkh(House h1)
 	{
@@ -128,36 +137,54 @@ public:
 	}
 	void changeGkh(int Num, bool m)
 	{
+		int count = 0;
 		for (int i = 0; i<listH.size(); i++)
 		{
 			if (listH[i].getHouseNumber() == Num)
 			{
+				count++;
 				cout << "House number " << listH[i].getHouseNumber() << " had GKH mode " << listH[i].getGkh() << " and now set to" << m << endl;
 				listH[i].setGkh(m);
 			}
 		}
+		if (!count)
+		{
+			throw invalid_argument("There is no House with such number");
+		}
 	}
 	void changePpl(int Num, int np)
 	{
+		int count = 0;
 		for (int i = 0; i<listH.size(); i++)
 		{
 			if (listH[i].getHouseNumber() == Num)
 			{
+				count++;
 				cout << "House number " << listH[i].getHouseNumber() << " had people amount of " << listH[i].getNumPpl() << " and now set to" << np << endl;
 				listH[i].setNumPpl(np);
 			}
 		}
+		if (!count)
+		{
+			throw invalid_argument("There is no House with such number");
+		}
 	}
 	void showPrice(int Num, bool p)
 	{
+		int count = 0;
 		for (int i = 0; i<listH.size(); i++)
 		{
 			if (listH[i].getHouseNumber() == Num)
 			{
+				count++;
 				cout << "House number " << listH[i].getHouseNumber() << " must to pay " << listH[i].bill() << " and mode of dolg was " << listH[i].getPayment();
 				cout << "Now set to " << p;
 				listH[i].setPayment(p);
 			}
+		}
+		if (!count)
+		{
+			throw invalid_argument("There is no House with such number");
 		}
 	}
 	vector<int> getDolg()
